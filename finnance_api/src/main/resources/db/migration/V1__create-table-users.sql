@@ -1,15 +1,16 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id uuid NOT NULL PRIMARY KEY,
     name character varying(255),
     email character varying(255) NOT NULL UNIQUE,
     password character varying(255) NOT NULL
 );
-CREATE TABLE notes(
-   id SERIAL PRIMARY KEY,
+
+CREATE TABLE IF NOT EXISTS notes(
+   id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
    owner_id UUID NOT NULL REFERENCES users (id),
    title VARCHAR(255) NOT NULL,
    value INT NOT NULL,
    is_outflow BOOLEAN,
    category VARCHAR(100),
    date DATE NOT NULL
-)
+);
