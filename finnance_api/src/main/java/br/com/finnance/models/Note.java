@@ -1,14 +1,15 @@
 package br.com.finnance.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 @Entity(name = "note")
 @Table(name = "notes")
@@ -16,16 +17,17 @@ import java.util.UUID;
 @Setter
 public class Note {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private UUID ownerId;
     private String title;
     private BigDecimal value;
-    @Value("is_outflow")
     private boolean isOutflow;
     private String category;
     private Date date;
 
-    public Note() {}
+    public Note() {
+    }
 
     public Note(UUID ownerId, String title, BigDecimal value, boolean isOutflow, String category, Date date) {
         this.ownerId = ownerId;
@@ -35,4 +37,13 @@ public class Note {
         this.category = category;
         this.date = date;
     }
+
+    public Stream<String> updateNote() {
+        Stream<String[]> objFields = Arrays.stream(Note.class.getDeclaredFields()).map(Field::toString).map(e -> {
+            return e.split("\\.");
+        });
+
+        return objFields.map(e -> e[e.length -1]);
+    }
+
 }

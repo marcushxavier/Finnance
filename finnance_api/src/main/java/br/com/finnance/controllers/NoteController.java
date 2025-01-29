@@ -28,7 +28,7 @@ class NoteController {
     }
 
     @PostMapping("/{user_id}/new-note")
-    public ResponseEntity newNote(@PathVariable(value = "user_id") UUID userId, @RequestBody Note noteData) {
+    public ResponseEntity createNewNote(@PathVariable(value = "user_id") UUID userId, @RequestBody Note noteData) {
         try {
             Note newNote = new Note(
                     userId,
@@ -40,7 +40,12 @@ class NoteController {
             return ResponseEntity.status(HttpStatus.OK).body(noteRepository.save(newNote));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
-
         }
+    }
+
+    @PutMapping("/edit-note")
+    public ResponseEntity editNote(@RequestBody Note newNoteData) {
+//        Note noteToUpdate = noteRepository.getReferenceById(newNoteData.getId());
+        return ResponseEntity.status(HttpStatus.OK).body(new Note().updateNote());
     }
 }

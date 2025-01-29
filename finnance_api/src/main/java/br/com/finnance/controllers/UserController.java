@@ -37,8 +37,7 @@ public class UserController {
     public ResponseEntity createUser(@RequestBody User userData) {
         try {
             User newUser = new User(userData.getName(), userData.getEmail(), userData.getPassword());
-//            return ResponseEntity.status(HttpStatus.OK).body(userRepository.save(newUser));
-            return ResponseEntity.status(HttpStatus.OK).body("fhafhidahf");
+            return ResponseEntity.status(HttpStatus.OK).body(userRepository.save(newUser));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
