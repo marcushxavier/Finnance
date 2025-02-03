@@ -1,5 +1,6 @@
 package br.com.finnance.models;
 
+import br.com.finnance.utils.ClassToSting;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,4 +48,8 @@ public class Note {
         this.date = date;
     }
 
+    @Override
+    public String toString() {
+        return ClassToSting.turnToString(this);
+    }
 }
