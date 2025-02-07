@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3c2c6a95-3ca8-433d-9eac-e492a3e831fe" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/finnance_api/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/java/br/com/finnance/FinnanceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/java/br/com/finnance/controllers/NoteController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/java/br/com/finnance/controllers/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/java/br/com/finnance/models/Note.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/java/br/com/finnance/models/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/java/br/com/finnance/models/repositories/NoteRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/java/br/com/finnance/models/repositories/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/java/br/com/finnance/utils/ClassToSting.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/java/br/com/finnance/utils/GetObjectFieldsName.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/java/br/com/finnance/utils/UpdateClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/resources/db/migration/V1__create-table-users.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/main/resources/db/migration/V2__change-flow-to-int.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/finnance_api/src/test/java/br/com/finnance/FinnanceApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2sfjww7P3i1lXmE6EhFoTx9NPwH" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/marcu/dev/Finnance/finnance_api"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\marcu\dev\Finnance\finnance_api" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="br.com.finnance.FinnanceApplication" />
+      <module name="finnance" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3c2c6a95-3ca8-433d-9eac-e492a3e831fe" name="Changes" comment="" />
+      <created>1738853764644</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1738853764644</updated>
+    </task>
+    <servers />
+  </component>
+</project>

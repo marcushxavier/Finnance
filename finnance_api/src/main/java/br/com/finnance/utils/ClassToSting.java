@@ -1,5 +1,7 @@
 package br.com.finnance.utils;
 
+import java.lang.reflect.Field;
+
 public class ClassToSting {
 
     public static String turnToString(Object obj) {
@@ -8,8 +10,10 @@ public class ClassToSting {
 
         for (String name : varNames) {
             try {
-                result = result.concat(name + ": " + obj.getClass().getDeclaredField(name) + "\n");
-            } catch (NoSuchFieldException e) {
+                Field fieldToAccess = obj.getClass().getDeclaredField(name);
+                fieldToAccess.setAccessible(true);
+                result = result.concat(name + ": " + fieldToAccess.get(obj) + "\n");
+            } catch (NoSuchFieldException | IllegalAccessException e) {
                 throw new RuntimeException(e.getMessage());
             }
         }

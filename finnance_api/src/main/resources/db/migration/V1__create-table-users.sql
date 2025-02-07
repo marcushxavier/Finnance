@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS notes(
    owner_id UUID NOT NULL REFERENCES users (id),
    title VARCHAR(255) NOT NULL,
    value INT NOT NULL,
-   is_outflow BOOLEAN,
+   flow INT,
    category VARCHAR(100),
    date DATE NOT NULL
 );

@@ -7,12 +7,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface NoteRepository extends JpaRepository<Note, Integer> {
-
-    @Transactional
     @Modifying
-    @Query("delete from Note n where n.owner_id=?1")
-    public void deleteAllByOwnerId(UUID ownerId);
+    @Transactional
+    @Query(value = "DELETE FROM Note note WHERE note.ownerId = :ownerId")
+    void deleteAllByOwnerId(@Param("ownerId") UUID ownerId);
+
+    List<Note> findByOwnerId(UUID ownerId);
 }

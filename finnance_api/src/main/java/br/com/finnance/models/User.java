@@ -1,20 +1,21 @@
 package br.com.finnance.models;
 
 import br.com.finnance.utils.ClassToSting;
-import br.com.finnance.utils.GetObjectFieldsName;
+import br.com.finnance.utils.UpdateClass;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-@Entity(name="users")
+@Entity
 @Table(name="users")
 @Getter
 @Setter
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.UUID)
+    @Id
     private UUID id;
 
     @Column(nullable = false, name = "name")
@@ -27,6 +28,13 @@ public class User {
     private String password;
 
     public User(){}
+
+    public User(User userData){
+        this.id = UUID.randomUUID();
+
+        String[] blackList = {"id"};
+        new UpdateClass<User>().update(this, userData, blackList);
+    }
 
     public User(String name, String email, String password) {
         this.id = UUID.randomUUID();

@@ -6,8 +6,11 @@ import br.com.finnance.utils.UpdateClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,37 +31,40 @@ public class UserController {
     }
 
     @PostMapping("new-user")
-    public ResponseEntity<String> createUser(@RequestBody User userData) {
+    public ResponseEntity<String> createUser(@RequestBody User userData) throws SQLException {
         try {
-            User newUser = new User(userData.getName(), userData.getEmail(), userData.getPassword());
+            if(userRepository.existsByEmail(userData.getEmail())){
+                throw new SQLException("email ja cadastrado");
+            }
+            User newUser = new User(userData);
             return ResponseEntity.status(HttpStatus.OK).body(userRepository.save(newUser).toString());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+
+        } catch (SQLException e) {
+            throw new SQLException(e.getMessage());
         }
     }
     @PutMapping("/edit-user")
     public ResponseEntity<String> editNote(@RequestBody User newUsarData) {
         try {
             User userToUpdate = userRepository.findById(newUsarData.getId()).get();
-            new UpdateClass<User>().update(userToUpdate, newUsarData);
+            new UpdateClass<User>().update(userToUpdate, newUsarData, null);
 
             return ResponseEntity.status(HttpStatus.OK).body(userRepository.save(userToUpdate).toString());
 
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
 
     @DeleteMapping("/delete-user/{user_id}")
     public ResponseEntity<String> deleteNote(@PathVariable(value = "user_id") UUID userId){
         try {
-            userRepository.deleteById(userId);
             new NoteController().deleteAllByOwnerId(userId);
-
+            userRepository.deleteById(userId);
             return ResponseEntity.status(HttpStatus.OK).body("usuário " + userId + " deletado");
 
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
 }
