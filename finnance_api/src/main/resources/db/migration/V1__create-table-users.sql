@@ -2,7 +2,8 @@ CREATE TABLE IF NOT EXISTS users (
     id uuid NOT NULL PRIMARY KEY,
     name character varying(255),
     email character varying(255) NOT NULL UNIQUE,
-    password character varying(255) NOT NULL
+    password character varying(255) NOT NULL,
+    role smallint NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS notes(

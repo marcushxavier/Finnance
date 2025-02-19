@@ -1,0 +1,25 @@
+services:
+  api:
+    image: finnance-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: 85843449
+      POSTGRES_USER: postgres
+      POSTGRES_BD: finnance
+
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "email@email.com"
+      PGADMIN_DEFAULT_PASSWORD: "123"
+    ports:
+      - "54321:80"
+    depends_on:
+      - db

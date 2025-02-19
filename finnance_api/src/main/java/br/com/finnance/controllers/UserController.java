@@ -6,11 +6,8 @@ import br.com.finnance.utils.UpdateClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,19 +27,6 @@ public class UserController {
         }
     }
 
-    @PostMapping("new-user")
-    public ResponseEntity<String> createUser(@RequestBody User userData) throws SQLException {
-        try {
-            if(userRepository.existsByEmail(userData.getEmail())){
-                throw new SQLException("email ja cadastrado");
-            }
-            User newUser = new User(userData);
-            return ResponseEntity.status(HttpStatus.OK).body(userRepository.save(newUser).toString());
-
-        } catch (SQLException e) {
-            throw new SQLException(e.getMessage());
-        }
-    }
     @PutMapping("/edit-user")
     public ResponseEntity<String> editNote(@RequestBody User newUsarData) {
         try {
@@ -57,7 +41,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete-user/{user_id}")
-    public ResponseEntity<String> deleteNote(@PathVariable(value = "user_id") UUID userId){
+    public ResponseEntity<String> deleteNote(@PathVariable(value = "user_id") UUID userId) {
         try {
             new NoteController().deleteAllByOwnerId(userId);
             userRepository.deleteById(userId);
