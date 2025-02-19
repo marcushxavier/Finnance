@@ -2,14 +2,12 @@ package br.com.finnance.controllers;
 
 import br.com.finnance.models.Note;
 import br.com.finnance.models.repositories.NoteRepository;
-import br.com.finnance.utils.GetObjectFieldsName;
 import br.com.finnance.utils.UpdateClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -17,23 +15,12 @@ class NoteController {
     @Autowired
     NoteRepository noteRepository;
 
-    @GetMapping("/notes")
-    public ResponseEntity<String> getAll() {
-        try {
-            List<Note> notesList = noteRepository.findAll();
-            return ResponseEntity.status(HttpStatus.OK).body(notesList.toString());
-
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return ResponseEntity.badRequest().body(e.getMessage());
-
-        }
-    }
-
-    @PostMapping("/new-note/{user_id}")
-    public ResponseEntity<String> createNewNote(@PathVariable(value = "user_id") UUID userId, @RequestBody Note noteData) {
+    @PostMapping("/{user_id}/new-note")
+    public ResponseEntity<String> createNote(@PathVariable(value = "user_id") UUID userId, @RequestBody Note noteData) {
         try {
             Note newNote = new Note(noteData);
+            newNote.setOwnerId(userId);
+
             return ResponseEntity.status(HttpStatus.OK).body(noteRepository.save(newNote).toString());
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
@@ -55,7 +42,7 @@ class NoteController {
 
     }
 
-    @DeleteMapping("/delete-note/{note_id}")
+    @DeleteMapping("/{note_id}/delete-note")
     public ResponseEntity<String> deleteNote(@PathVariable(name = "note_id") Note noteToDelete) {
         try {
             noteRepository.deleteById(noteToDelete.getId());
@@ -66,21 +53,21 @@ class NoteController {
         }
     }
 
-    @GetMapping("get-notes-of-owner/{owner_id}")
-    public ResponseEntity<String> findByOwnerId(@PathVariable(value = "owner_id") UUID ownerId) {
+    @GetMapping("/{owner_id}/get-notes-of-owner")
+    public ResponseEntity<String> findAllByOwnerId(@PathVariable(value = "owner_id") UUID ownerId) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(noteRepository.findByOwnerId(ownerId).toString());
+            return ResponseEntity.status(HttpStatus.OK).body(noteRepository.findAllByOwnerId(ownerId).toString());
 
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
-    @DeleteMapping("/delete-all-notes/{owner_id}")
+    @DeleteMapping("/{owner_id}/delete-all-notes")
     public void deleteAllByOwnerId(@PathVariable(value = "owner_id") UUID ownerId) {
         try {
             noteRepository.deleteAllByOwnerId(ownerId);
-            System.out.println("usuário "+ ownerId + " deletado");
+            System.out.println("usuário " + ownerId + " deletado");
         } catch (RuntimeException e) {
             System.err.println(e.getMessage());
         }

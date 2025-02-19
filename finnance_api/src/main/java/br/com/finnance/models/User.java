@@ -1,6 +1,5 @@
 package br.com.finnance.models;
 
-import br.com.finnance.security.roles.UserRole;
 import br.com.finnance.utils.ClassToSting;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,15 +36,11 @@ public class User implements UserDetails {
     @Column(nullable = false, name = "password")
     private String password;
 
-    @Column(nullable = false, name = "role")
-    private UserRole role;
-
-    public User(String name, String email, String password, UserRole role) {
+    public User(String name, String email, String password) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = role;
     }
 
     @Override
@@ -55,10 +50,6 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        if (this.role == UserRole.ADMIN) {
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        }
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 

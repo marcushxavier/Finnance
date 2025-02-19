@@ -16,5 +16,5 @@ public interface NoteRepository extends JpaRepository<Note, Integer> {
     @Query(value = "DELETE FROM Note note WHERE note.ownerId = :ownerId")
     void deleteAllByOwnerId(@Param("ownerId") UUID ownerId);
 
-    List<Note> findByOwnerId(UUID ownerId);
+    List<Note> findAllByOwnerId(UUID ownerId);
 }

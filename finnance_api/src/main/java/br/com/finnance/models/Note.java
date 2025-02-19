@@ -3,13 +3,11 @@ package br.com.finnance.models;
 import br.com.finnance.utils.ClassToSting;
 import br.com.finnance.utils.UpdateClass;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -37,7 +35,7 @@ public class Note {
     private String category;
 
     @Column(nullable = false, name = "date")
-    private Timestamp date;
+    private LocalDate date;
 
     public Note() {
     }
@@ -45,16 +43,6 @@ public class Note {
     public Note(Note noteData) {
         String[] blackList = {"id"};
         new UpdateClass<Note>().update(this, noteData, blackList);
-    }
-
-    public Note(UUID ownerId, String title, BigDecimal value, int flow, String category, Timestamp
-            date) {
-        this.ownerId = ownerId;
-        this.title = title;
-        this.value = value;
-        this.flow = flow;
-        this.category = category;
-        this.date = date;
     }
 
     @Override

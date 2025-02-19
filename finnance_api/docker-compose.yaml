@@ -5,6 +5,11 @@ services:
       - "8080:8080"
     depends_on:
       - db
+    environment:
+      DB_URL: "jdbc:postgres://db"
+      DB_USER: postgres
+      DB_PASSWORD: 85843449
+      JWT_SECRET: lkejdgyif68f3vkagv7vwsbc7syijvfg3m908gcwvieeast5k6r@Ry4h
   db:
     image: postgres:latest
     ports:
@@ -13,13 +18,3 @@ services:
       POSTGRES_PASSWORD: 85843449
       POSTGRES_USER: postgres
       POSTGRES_BD: finnance
-
-  pgadmin-compose:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "email@email.com"
-      PGADMIN_DEFAULT_PASSWORD: "123"
-    ports:
-      - "54321:80"
-    depends_on:
-      - db

@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -17,21 +16,16 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/user")
-    public ResponseEntity<String> getAll() {
-        try {
-            List<User> allUsers = userRepository.findAll();
-            return ResponseEntity.status(HttpStatus.OK).body(allUsers.toString());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    @GetMapping("/{user_id}/get-user")
+    public ResponseEntity<User> getUser(@PathVariable("user_id") UUID userId) {
+        return ResponseEntity.ok(userRepository.getReferenceById(userId));
     }
 
-    @PutMapping("/edit-user")
-    public ResponseEntity<String> editNote(@RequestBody User newUsarData) {
+    @PutMapping("/{user_id}/edit-user")
+    public ResponseEntity<String> editUser(@RequestBody User newUserData) {
         try {
-            User userToUpdate = userRepository.findById(newUsarData.getId()).get();
-            new UpdateClass<User>().update(userToUpdate, newUsarData, null);
+            User userToUpdate = userRepository.findById(newUserData.getId()).get();
+            new UpdateClass<User>().update(userToUpdate, newUserData, null);
 
             return ResponseEntity.status(HttpStatus.OK).body(userRepository.save(userToUpdate).toString());
 
@@ -40,8 +34,8 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/delete-user/{user_id}")
-    public ResponseEntity<String> deleteNote(@PathVariable(value = "user_id") UUID userId) {
+    @DeleteMapping("/{user_id}/delete-user")
+    public ResponseEntity<String> deleteUser(@PathVariable(value = "user_id") UUID userId) {
         try {
             new NoteController().deleteAllByOwnerId(userId);
             userRepository.deleteById(userId);
