@@ -17,8 +17,8 @@ public class UserController {
     UserRepository userRepository;
 
     @GetMapping("/{user_id}/get-user")
-    public ResponseEntity<User> getUser(@PathVariable("user_id") UUID userId) {
-        return ResponseEntity.ok(userRepository.getReferenceById(userId));
+    public ResponseEntity<String> getUser(@PathVariable("user_id") UUID userId) {
+        return ResponseEntity.ok(userRepository.getReferenceById(userId).toString());
     }
 
     @PutMapping("/{user_id}/edit-user")
